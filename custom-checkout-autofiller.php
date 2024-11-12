@@ -82,27 +82,46 @@ function leaflet_map_shortcode( $atts ) {
 
         // Function to populate WooCommerce checkout fields
         function populateCheckoutFields(address, latLng) {
-            if (document.body.classList.contains('woocommerce-checkout')) {
-                document.getElementById('billing_address_1').value = address.suburb || '';
-                document.getElementById('billing_address_2').value = address.county || '';
-                document.getElementById('billing_city').value = address.city || 'Addis Ababa';
-                document.getElementById('billing_postcode').value = address.postcode || '';
-                document.getElementById('billing_country').value = address.country_code || '';
+    if (document.body.classList.contains('woocommerce-checkout')) {
+        const billingAddress1 = document.getElementById('billing_address_1');
+        if (billingAddress1) billingAddress1.value = address.suburb || '';
 
-                document.getElementById('shipping_address_1').value = address.road || '';
-                document.getElementById('shipping_address_2').value = address.suburb || '';
-                document.getElementById('shipping_city').value = address.city || '';
-                document.getElementById('shipping_postcode').value = address.postcode || '';
-                document.getElementById('shipping_country').value = address.country_code || '';
+        const billingAddress2 = document.getElementById('billing_address_2');
+        if (billingAddress2) billingAddress2.value = address.county || '';
 
-                var orderComments = document.getElementById('order_comments');
-                if (orderComments) {
-                    document.querySelector('form.checkout').addEventListener('submit', function() {
-                        orderComments.value += `\nLatitude: ${latLng.lat}, Longitude: ${latLng.lng}`;
-                    });
-                }
-            }
+        const billingCity = document.getElementById('billing_city');
+        if (billingCity) billingCity.value = address.city || 'Addis Ababa';
+
+        const billingPostcode = document.getElementById('billing_postcode');
+        if (billingPostcode) billingPostcode.value = address.postcode || '';
+
+        const billingCountry = document.getElementById('billing_country');
+        if (billingCountry) billingCountry.value = address.country_code || '';
+
+        const shippingAddress1 = document.getElementById('shipping_address_1');
+        if (shippingAddress1) shippingAddress1.value = address.road || '';
+
+        const shippingAddress2 = document.getElementById('shipping_address_2');
+        if (shippingAddress2) shippingAddress2.value = address.suburb || '';
+
+        const shippingCity = document.getElementById('shipping_city');
+        if (shippingCity) shippingCity.value = address.city || '';
+
+        const shippingPostcode = document.getElementById('shipping_postcode');
+        if (shippingPostcode) shippingPostcode.value = address.postcode || '';
+
+        const shippingCountry = document.getElementById('shipping_country');
+        if (shippingCountry) shippingCountry.value = address.country_code || '';
+
+        const orderComments = document.getElementById('order_comments');
+        if (orderComments) {
+            document.querySelector('form.checkout').addEventListener('submit', function() {
+                orderComments.value += `\nLatitude: ${latLng.lat}, Longitude: ${latLng.lng}`;
+            });
         }
+    }
+}
+
     </script>
     <?php
     return ob_get_clean();
